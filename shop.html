@@ -217,7 +217,7 @@
     </section>
 
     <div id="product-grid" class="product-grid">
-        <!-- Products will be loaded here dynamically -->
+        <div id="loading-msg" style="grid-column: 1/-1; text-align: center; padding: 2rem;">Loading products...</div>
     </div>
 
     <footer class="footer">
@@ -291,6 +291,12 @@
 
         const grid = document.getElementById('product-grid');
 
+        if (products.length > 0) {
+            grid.innerHTML = ''; // Clear loading message
+        } else {
+            grid.innerHTML = '<p style="text-align:center; grid-column:1/-1;">No products found.</p>';
+        }
+
         products.forEach(product => {
             // Default to first variant
             const defaultVariant = product.variants[0];
@@ -323,14 +329,19 @@
             grid.appendChild(card);
         });
 
-        // Hamburger Logic
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        if (hamburger) {
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-        }
+    </script>
+    <script>
+        // Hamburger Logic (Separated for robustness)
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    console.log('Hamburger clicked'); // Debugging
+                });
+            }
+        });
     </script>
 </body>
 

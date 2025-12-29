@@ -190,14 +190,17 @@
     import { cart } from './js/cart.js';
     // Cart is auto-initialized by the import
 
-    // Hamburger Menu Logic (Inline for simplicity or keep in external file)
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    if (hamburger) {
-      hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-    }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+        });
+      }
+    });
   </script>
 </body>
 
