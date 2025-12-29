@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Medix</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("1yeha5UhXk1uizZCn");
+        })();
+    </script>
+    <style>
+        .checkout-section {
+            padding: 120px 5% 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-card,
+        .summary-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .place-order-btn {
+            background: #4CA771;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .place-order-btn:hover {
+            background: #3a8f5e;
+        }
+
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .success-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            color: #333;
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="nav-bar">
+        <div class="logo"><span>Medix</span></div>
+    </header>
+
+    <section class="checkout-section container">
+        <!-- Left: Form -->
+        <div class="form-card">
+            <h2 style="margin-bottom: 1.5rem;">Shipping Details</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" required placeholder="+1 555 123 4567">
+                </div>
+                <div class="form-group">
+                    <label>Shipping Address</label>
+                    <textarea name="address" rows="3" required placeholder="123 Main St, City, Country"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;" name="payment">
+                        <option value="Zelle">Zelle</option>
+                        <option value="CashApp">CashApp</option>
+                        <option value="Apple Pay">Apple Pay</option>
+                        <option value="Crypto">Cryptocurrency (Bitcoin/USDT)</option>
+                    </select>
+                    <p style="font-size:0.85rem; color:#666; margin-top:5px;">* Payment instructions will be emailed
+                        after order placement.</p>
+                </div>
+                <button type="submit" class="place-order-btn" id="submitBtn">PLACE ORDER</button>
+            </form>
+        </div>
+
+        <!-- Right: Summary -->
+        <div class="summary-card">
+            <h2 style="margin-bottom: 1.5rem;">Order Summary</h2>
+            <div id="order-summary"></div>
+            <div style="font-size: 1.5rem; font-weight: bold; margin-top: 1rem; text-align: right;">
+                Total: <span id="summary-total">$0.00</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="success-overlay" id="successModal">
+        <div class="success-box">
+            <h1 style="color: #4CA771; font-size: 3rem; margin-bottom: 1rem;">&#10003;</h1>
+            <h2>Order Request Received!</h2>
+            <p style="margin: 1rem 0;">Thank you for your order. We will send a confirmation email with payment
+                instructions.</p>
+            <a href="index.html" class="place-order-btn" style="display:inline-block;">Back to Home</a>
+        </div>
+    </div>
+
+    <footer class="footer" style="background:#013237; margin-top:4rem;">
+        <div class="container" style="padding: 3rem 5%;">
+            <div class="footer-grid"
+                style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:2rem;">
+                <div class="footer-col">
+                    <h4 style="color:white; margin-bottom:1rem;">Quick Links</h4>
+                    <ul style="list-style:none;">
+                        <li><a href="index.html" style="color:#aaa; text-decoration:none;">Home</a></li>
+                        <li><a href="shop.html" style="color:#aaa; text-decoration:none;">Shop</a></li>
+                        <li><a href="about.html" style="color:#aaa; text-decoration:none;">About</a></li>
+                        <li><a href="contact.html" style="color:#aaa; text-decoration:none;">Contact</a></li>
+                        <li><a href="blog.html" style="color:#aaa; text-decoration:none;">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="color:#aaa;">
+                    <h4 style="color:white; margin-bottom:1rem;">Medix</h4>
+                    <p>Trusted partner in GLP-1 and peptide therapies.</p>
+                    <address style="font-style:normal; margin-top:10px;">123 Pharma Lane<br>MedCity, MC 90210<br>USA
+                    </address>
+                </div>
+                <div class="footer-col" style="color:#aaa;">
+                    <h4 style="color:white; margin-bottom:1rem;">Support</h4>
+                    <p><a href="mailto:support@medix.com"
+                            style="color:#aaa; text-decoration:none;">support@medix.com</a></p>
+                    <p><a href="tel:+15551234567" style="color:#aaa; text-decoration:none;">+1 (555) 123-4567</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom"
+                style="text-align:center; margin-top:3rem; padding-top:1rem; border-top:1px solid #1a4d52; color:#777;">
+                <p>&copy; 2025 Medix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { cart } from './js/cart.js';
+
+        // 1. Render Summary
+        const summaryContainer = document.getElementById('order-summary');
+        const totalEl = document.getElementById('summary-total');
+
+        if (cart.items.length === 0) {
+            window.location.href = 'shop.html'; // Redirect validation
+        }
+
+        cart.items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'summary-item';
+            div.innerHTML = `
+            <span>${item.name} (x${item.qty})</span>
+            <span>$${(item.price * item.qty).toFixed(2)}</span>
+        `;
+            summaryContainer.appendChild(div);
+        });
+        totalEl.textContent = `$${cart.total().toFixed(2)}`;
+
+        // 2. Handle Form Submit
+        const form = document.getElementById('orderForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Processing...";
+
+            // Construct Order Data
+            const orderDetails = cart.items.map(i => `${i.name} x${i.qty} - $${(i.price * i.qty).toFixed(2)}`).join('\n');
+
+            // Generate unique order ID (format: MDX-YYYYMMDD-XXXX)
+            const now = new Date();
+            const dateStr = now.getFullYear().toString() +
+                (now.getMonth() + 1).toString().padStart(2, '0') +
+                now.getDate().toString().padStart(2, '0');
+            const randomNum = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+            const orderId = `MDX-${dateStr}-${randomNum}`;
+
+            // Prepare EmailJS params
+            const templateParams = {
+                order_id: orderId,
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                address: form.address.value,
+                payment_method: form.payment.value,
+                order_details: orderDetails,
+                total_price: cart.total().toFixed(2)
+            };
+
+            // Send email via EmailJS
+            emailjs.send('service_1tjiwto', 'template_hamkqyb', templateParams)
+                .then(function (response) {
+                    console.log('Order email sent!', response.status, response.text);
+                    // Success State
+                    document.getElementById('successModal').style.display = 'flex';
+                    cart.clear(); // Clear cart after order
+                }, function (error) {
+                    console.log('Email failed...', error);
+                    alert("Email Failed: " + JSON.stringify(error));
+                    // Re-enable button on error so they can try again
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "PLACE ORDER";
+                });
+        });
+    </script>
+</body>
+
+</html>

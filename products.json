@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Wegovy",
+        "price": 200,
+        "image": "img.jpeg"
+    },
+     {
+        "id": 1,
+        "name": "zepbound",
+        "price": 200,
+        "image": "medical.jpg"
+    },
+     {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    },
+     {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    },
+     {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    },
+     {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    },
+     {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    },
+     {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    }
+    , {
+        "id": 1,
+        "name": "Mounjaro",
+        "price": 200,
+        "image": "medicals.jpg"
+    }
+]

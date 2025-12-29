@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Medix Weight Loss</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 5%;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            /* Slight glass effect */
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #013237;
+        }
+
+        .product-info .price {
+            font-size: 1.25rem;
+            color: #4CA771;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-info p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .add-btn {
+            background: #013237;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #4CA771;
+        }
+
+        /* Modal CSS */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #013237 0%, #01454d 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            position: relative;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #4CA771;
+            font-size: 1.8rem;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            margin: 1rem 0 2rem;
+            color: #ccc;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-continue,
+        .btn-cart {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-continue {
+            background: transparent;
+            border: 1px solid #aaa;
+            color: #ddd;
+        }
+
+        .btn-cart {
+            background: #4CA771;
+            color: white;
+        }
+
+        .btn-continue:hover,
+        .btn-cart:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Added to Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <i class="fa fa-check-circle" style="font-size: 3rem; color: #4CA771; margin-bottom: 1rem;"></i>
+            <h2>Added to Cart!</h2>
+            <p id="modal-product-name">Product Name</p>
+            <div class="modal-buttons">
+                <button class="btn-continue" onclick="closeModal()">Continue Shopping</button>
+                <a href="cart.html" class="btn-cart">View Cart</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="nav-bar">
+        <div class="logo">
+            <!-- <img src="IMG_1657.PNG" alt="Medix Logo"> -->
+            <span>Medix</span>
+        </div>
+
+        <nav class="nav-links" id="navLinks">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a class="active" href="shop.html">SHOP</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+            </ul>
+        </nav>
+
+        <div class="icon-cart">
+            <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                </svg>
+                <span id="cartCount">0</span>
+            </a>
+        </div>
+        <button class="hamburger" id="hamburger"><i class="fa fa-bars"></i></button>
+    </header>
+
+    <section class="hero" style="min-height: 40vh; padding-top: 120px;">
+        <div class="hero-section">
+            <h1>Shop Medications</h1>
+            <p>Premium weight loss and hormone therapies. FDA-approved and lab-tested.</p>
+        </div>
+    </section>
+
+    <div id="product-grid" class="product-grid">
+        <!-- Products will be loaded here dynamically -->
+    </div>
+
+    <footer class="footer">
+        <div class="footer-bottom" style="text-align: center; padding: 2rem;">
+            <p>© 2025 Medix. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { products } from './js/products.js';
+        import { cart } from './js/cart.js';
+
+        // Modal Logic
+        window.closeModal = () => {
+            const modal = document.getElementById('cartModal');
+            modal.classList.remove('active');
+        };
+
+        // Close on outside click
+        window.onclick = (event) => {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Global add function for buttons (attach to window)
+        window.addToCart = (parentId) => {
+            const product = products.find(p => p.id === parentId);
+            if (!product) return;
+
+            // Get the selected variant ID from the dropdown
+            const select = document.getElementById(`variant-${parentId}`);
+            const variantId = select.value;
+
+            // Find the specific variant object
+            const variant = product.variants.find(v => v.id === variantId);
+
+            if (variant) {
+                // Construct a cart item combining parent info + variant info
+                const cartItem = {
+                    id: variant.id, // Unique ID for cart
+                    name: variant.name, // Full name with dosage
+                    price: variant.price,
+                    image: product.image,
+                    description: product.description
+                };
+                cart.add(cartItem);
+
+                // Show Modal
+                // Update modal content
+                const modalName = document.getElementById('modal-product-name');
+                modalName.textContent = `${variant.name} was added to your cart.`;
+
+                const modal = document.getElementById('cartModal');
+                modal.classList.add('active');
+            }
+        };
+
+        // Function to update price display when dropdown changes
+        window.updatePrice = (parentId) => {
+            const product = products.find(p => p.id === parentId);
+            const select = document.getElementById(`variant-${parentId}`);
+            const priceDisplay = document.getElementById(`price-${parentId}`);
+
+            const variant = product.variants.find(v => v.id === select.value);
+            if (variant) {
+                priceDisplay.textContent = `$${variant.price.toFixed(2)}`;
+            }
+        };
+
+        const grid = document.getElementById('product-grid');
+
+        products.forEach(product => {
+            // Default to first variant
+            const defaultVariant = product.variants[0];
+
+            const card = document.createElement('div');
+            card.className = 'product-card';
+
+            // Generate options for select
+            const options = product.variants.map(v =>
+                `<option value="${v.id}">${v.mg}</option>`
+            ).join('');
+
+            card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <div class="price" id="price-${product.id}">$${defaultVariant.price.toFixed(2)}</div>
+                <p>${product.description}</p>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label for="variant-${product.id}" style="display:block; margin-bottom:5px; font-weight:bold; color:#013237;">Select Dosage:</label>
+                    <select id="variant-${product.id}" onchange="updatePrice('${product.id}')" style="width:100%; padding:8px; border-radius:4px; border:1px solid #ccc;">
+                        ${options}
+                    </select>
+                </div>
+
+                <button class="add-btn" onclick="addToCart('${product.id}')">ADD TO CART</button>
+            </div>
+        `;
+            grid.appendChild(card);
+        });
+
+        // Hamburger Logic
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

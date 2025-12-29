@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Medix - Trusted GLP-1 & Hormone Therapies</title>
+    <meta name="description"
+        content="Learn about Medix, your trusted partner for pharmaceutical-grade weight loss solutions like Ozempic, Mounjaro, and Growth Hormones.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ABOUT HERO */
+        .about-hero {
+            background: linear-gradient(rgba(1, 50, 55, 0.9), rgba(1, 50, 55, 0.8)), url('medical.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* MISSION SECTION */
+        .mission-section {
+            padding: 5rem 5%;
+            background: #fff;
+            text-align: center;
+        }
+
+        .mission-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mission-section h2 {
+            font-size: 2.5rem;
+            color: #013237;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        /* ATTRIBUTES GRID */
+        .attributes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .attribute-card {
+            background: #fdfdfd;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .attribute-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .attribute-card i {
+            font-size: 2.5rem;
+            color: #4CA771;
+            margin-bottom: 1.5rem;
+        }
+
+        .attribute-card h3 {
+            color: #013237;
+            margin-bottom: 1rem;
+        }
+
+        /* PRODUCTS OVERVIEW */
+        .products-section {
+            padding: 5rem 5%;
+            background: #f4f4f4;
+        }
+
+        .products-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .products-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .products-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .products-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .products-text h2 {
+            font-size: 2.5rem;
+            color: #013237;
+            margin-bottom: 1.5rem;
+        }
+
+        .products-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .products-text ul li {
+            color: #000;
+            font-weight: 500;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            background: #013237;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .learn-more-btn:hover {
+            background: #4CA771;
+        }
+
+        /* CTA SECTION */
+        .about-cta {
+            background: #013237;
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .about-cta h2 {
+            margin-bottom: 1rem;
+        }
+
+        .about-cta p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="nav-bar">
+        <div class="logo">
+            <!-- <img src="IMG_1657.PNG" alt="Medix Logo"> -->
+            <span>Medix</span>
+        </div>
+
+        <nav class="nav-links" id="navLinks">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a class="active" href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+            </ul>
+        </nav>
+
+        <div class="icon-cart">
+            <a href="cart.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                </svg>
+                <span id="cartCount">0</span>
+            </a>
+        </div>
+        <button class="hamburger" id="hamburger"><i class="fa fa-bars"></i></button>
+    </header>
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Expert Care, Proven Results</h1>
+            <p>Your trusted partner in pharmaceutical weight management and hormone therapy.</p>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission-section">
+        <div class="mission-container">
+            <h2>Our Mission</h2>
+            <p>At Medix, we believe that effective weight management and hormonal health should be accessible, safe, and
+                transparent. We bridge the gap between patients and premium pharmaceutical therapies, offering a
+                discreet
+                and reliable pathway to better health.</p>
+            <p>We are dedicated to providing only authentic, FDA-approved medications sourced directly from licensed
+                manufacturers. Our commitment to quality ensures that every product you receive meets the highest
+                standards of safety and efficacy.</p>
+
+            <div class="attributes-grid">
+                <div class="attribute-card">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <h3>Authenticity Guaranteed</h3>
+                    <p>100% genuine medications. No generics, no composites. Only the real deal.</p>
+                </div>
+                <div class="attribute-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safety First</h3>
+                    <p>Rigorous quality control and temperature-regulated shipping for maximum potency.</p>
+                </div>
+                <div class="attribute-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Expert Support</h3>
+                    <p>Dedicated team available to guide you through dosing, usage, and product questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS OVERVIEW -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-content">
+                <div class="products-image">
+                    <img src="img.jpeg" alt="Medix Products Display">
+                </div>
+                <div class="products-text">
+                    <h2>Advanced Therapies</h2>
+                    <p>We specialize in the latest advancements in metabolic health:</p>
+                    <ul style="list-style: none; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: #4CA771; margin-right: 10px;"></i> <strong>GLP-1 Agonists:</strong>
+                            Semaglutide (Ozempic®, Wegovy®) for powerful appetite control.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: #4CA771; margin-right: 10px;"></i> <strong>Dual Agonists:</strong>
+                            Tirzepatide (Mounjaro®) for superior weight loss results.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: #4CA771; margin-right: 10px;"></i> <strong>Growth Hormone:</strong>
+                            Pharmaceutical HGH for recovery and anti-aging.</li>
+                    </ul>
+                    <p>Our catalog is curated to support your journey towards a healthier, more vibrant life.</p>
+                    <a href="shop.html" class="learn-more-btn">Browse Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+        <div class="container">
+            <h2>Ready to Transform Your Health?</h2>
+            <p>Join thousands of satisfied clients who trust Medix for their pharmaceutical needs.</p>
+            <a href="shop.html" class="learn-more-btn"
+                style="background: #4CA771; color: white; border: 2px solid #4CA771;">Start Your Order</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container" style="padding: 3rem 5%;">
+            <div class="footer-grid"
+                style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:2rem;">
+                <div class="footer-col">
+                    <h4 style="color:white; margin-bottom:1rem;">Quick Links</h4>
+                    <ul style="list-style:none;">
+                        <li><a href="index.html" style="color:#aaa; text-decoration:none;">Home</a></li>
+                        <li><a href="shop.html" style="color:#aaa; text-decoration:none;">Shop</a></li>
+                        <li><a href="about.html" style="color:#aaa; text-decoration:none;">About</a></li>
+                        <li><a href="contact.html" style="color:#aaa; text-decoration:none;">Contact</a></li>
+                        <li><a href="blog.html" style="color:#aaa; text-decoration:none;">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="color:#aaa;">
+                    <h4 style="color:white; margin-bottom:1rem;">Medix</h4>
+                    <p>Trusted partner in GLP-1 and peptide therapies.</p>
+                    <address style="font-style:normal; margin-top:10px;">123 Pharma Lane<br>MedCity, MC 90210<br>USA
+                    </address>
+                </div>
+                <div class="footer-col" style="color:#aaa;">
+                    <h4 style="color:white; margin-bottom:1rem;">Support</h4>
+                    <p><a href="mailto:medixsupply1@gmail.com"
+                            style="color:#aaa; text-decoration:none;">medixsupply1@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom"
+                style="text-align:center; margin-top:3rem; padding-top:1rem; border-top:1px solid #1a4d52; color:#777;">
+                <p>&copy; 2025 Medix. All rights reserved.</p>
+            </div>
+        </div>
+        <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+    </footer>
+
+    <script type="module">
+        import { cart } from './js/cart.js';
+        // Cart init
+
+        // Hamburger Logic
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

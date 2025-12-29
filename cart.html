@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Medix</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .cart-section {
+            padding: 120px 5% 4rem;
+            min-height: 60vh;
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            color: #013237;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            text-align: left;
+            padding: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-table th {
+            background: #013237;
+            color: white;
+        }
+
+        .qty-btn {
+            background: #ddd;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .remove-btn {
+            color: #d9534f;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .total-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
+        .total-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CA771;
+        }
+
+        .checkout-btn {
+            background: #4CA771;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #3a8f5e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="nav-bar">
+        <div class="logo">
+            <span>Medix</span>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="cart-section container">
+        <h1 style="margin-bottom: 2rem; color: #013237;">Your Shopping Cart</h1>
+
+        <div id="empty-msg" style="display: none; text-align: center;">
+            <p>Your cart is currently empty.</p>
+            <a href="shop.html" class="checkout-btn" style="margin-top: 1rem; display: inline-block;">Start Shopping</a>
+        </div>
+
+        <div id="cart-container">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body">
+                    <!-- Items injected here -->
+                </tbody>
+            </table>
+
+            <div class="total-section">
+                <div>Subtotal: <span id="cart-total" class="total-price">$0.00</span></div>
+                <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container" style="padding: 3rem 5%;">
+            <div class="footer-grid"
+                style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:2rem;">
+                <div class="footer-col">
+                    <h4 style="color:white; margin-bottom:1rem;">Quick Links</h4>
+                    <ul style="list-style:none;">
+                        <li><a href="index.html" style="color:#aaa; text-decoration:none;">Home</a></li>
+                        <li><a href="shop.html" style="color:#aaa; text-decoration:none;">Shop</a></li>
+                        <li><a href="about.html" style="color:#aaa; text-decoration:none;">About</a></li>
+                        <li><a href="contact.html" style="color:#aaa; text-decoration:none;">Contact</a></li>
+                        <li><a href="blog.html" style="color:#aaa; text-decoration:none;">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="color:#aaa;">
+                    <h4 style="color:white; margin-bottom:1rem;">Medix</h4>
+                    <p>Trusted partner in GLP-1 and peptide therapies.</p>
+                    <address style="font-style:normal; margin-top:10px;">123 Pharma Lane<br>MedCity, MC 90210<br>USA
+                    </address>
+                </div>
+                <div class="footer-col" style="color:#aaa;">
+                    <h4 style="color:white; margin-bottom:1rem;">Support</h4>
+                    <p><a href="mailto:support@medix.com"
+                            style="color:#aaa; text-decoration:none;">support@medix.com</a></p>
+                    <p><a href="tel:+15551234567" style="color:#aaa; text-decoration:none;">+1 (555) 123-4567</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom"
+                style="text-align:center; margin-top:3rem; padding-top:1rem; border-top:1px solid #1a4d52; color:#777;">
+                <p>&copy; 2025 Medix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { cart } from './js/cart.js';
+
+        function renderCart() {
+            const tbody = document.getElementById('cart-body');
+            const emptyMsg = document.getElementById('empty-msg');
+            const container = document.getElementById('cart-container');
+            const totalEl = document.getElementById('cart-total');
+
+            if (cart.items.length === 0) {
+                container.style.display = 'none';
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'block';
+            emptyMsg.style.display = 'none';
+            tbody.innerHTML = '';
+
+            cart.items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                        <span>${item.name}</span>
+                    </div>
+                </td>
+                <td>$${item.price.toFixed(2)}</td>
+                <td>
+                    <button class="qty-btn minus" data-id="${item.id}">-</button>
+                    <span style="margin: 0 10px;">${item.qty}</span>
+                    <button class="qty-btn plus" data-id="${item.id}">+</button>
+                </td>
+                <td>$${(item.price * item.qty).toFixed(2)}</td>
+                <td><button class="remove-btn" data-id="${item.id}"><i class="fa fa-trash"></i></button></td>
+            `;
+                tbody.appendChild(row);
+            });
+
+            totalEl.textContent = `$${cart.total().toFixed(2)}`;
+        }
+
+        renderCart();
+
+        // Event Listeners for Cart Actions
+        document.getElementById('cart-body').addEventListener('click', (e) => {
+            const id = e.target.closest('button')?.dataset.id;
+            if (!id) return;
+
+            if (e.target.classList.contains('plus')) {
+                const item = cart.items.find(i => i.id === id);
+                cart.updateQty(id, item.qty + 1);
+            } else if (e.target.classList.contains('minus')) {
+                const item = cart.items.find(i => i.id === id);
+                cart.updateQty(id, item.qty - 1);
+            } else if (e.target.closest('.remove-btn')) {
+                cart.remove(id);
+            }
+            renderCart();
+        });
+
+    </script>
+</body>
+
+</html>
